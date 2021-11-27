@@ -2,6 +2,7 @@
 const difficultySlider = document.getElementById("difficulty_slider")
 const bot = document.getElementById("bot")
 const reset = document.getElementById("reset")
+const resetWins = document.getElementById("resetWins")
 
 const winsX = document.getElementById("winsX")
 const winsO = document.getElementById("winsO")
@@ -42,6 +43,12 @@ function reset_board()
         [0, 0, 0]
     ]
     tilesList.forEach(element => element.textContent = "")
+}
+
+function resetScores()
+{
+    winsO.textContent = 0
+    winsX.textContent = 0
 }
 
 function play_move(move) 
@@ -159,19 +166,10 @@ function win(winner, winnerLine)
 
 function play_bot()
 {
-    console.log("bot")
-    if (difficulty_slider.value == 0)
-    {
-        movedata = randomMove(board)
-        tilesList[movedata[0] * 3 + movedata[1]].textContent = "O"
-        board[movedata[0]][movedata[1]] = 2
-    }
-    else
-    {
-        movedata = minimax(2, board, difficulty_slider.value)[1]
-        tilesList[movedata[0] * 3 + movedata[1]].textContent = "O"
-        board[movedata[0]][movedata[1]] = 2
-    }
+    movedata = minimax(2, board, difficulty_slider.value)[1]
+    tilesList[movedata[0] * 3 + movedata[1]].textContent = "O"
+    board[movedata[0]][movedata[1]] = 2
+    
     windata = isWin(board)
     winner = windata[0]
     winnerLine = windata[1]
@@ -266,6 +264,7 @@ window.onload = function()
 {  
     
     reset.addEventListener("click", reset_board)
+    resetWins.addEventListener("click", resetScores)
     tl.addEventListener("click", () => play_move(0))
     tm.addEventListener("click", () => play_move(1))
     tr.addEventListener("click", () => play_move(2))
