@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>My Project</title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <h1>Tic Tac Toe</h1>
+        <input id="bot" type="checkbox">Play against bot<br>
+        <div>Difficulty:</div>
+        <input id="difficulty_slider" type="range" min="0" max="10" step="1"><br>
+        <div id="scoreboard">
+            <div>
+                <div >wins X: </div>
+                <div id="winsX">0</div>
+            </div>
+            <div>
+                <div>wins O: </div>
+                <div id="winsO">0</div>
+            </div>
+        </div>
+            
+        <div>
+            <div class="group">
+                <button id="tl" class="main"></button>
+                <button id="tm" class="main"></button>
+                <button id="tr" class="main"></button>
+            </div>
+            <div class="group">
+                <button id="ml" class="main"></button>
+                <button id="mm" class="main"></button>
+                <button id="mr" class="main"></button>
+            </div>
+            <div class="group">
+                <button id="bl" class="main"></button>
+                <button id="bm" class="main"></button>
+                <button id="br" class="main"></button>
+            </div>
+        </div>
+        <button id="reset">Reset</button>
+        <script src="main.js"></script>
+    </body>
+</html>
