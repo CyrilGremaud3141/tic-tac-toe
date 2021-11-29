@@ -18,6 +18,8 @@ const bl = document.getElementById("bl")
 const bm = document.getElementById("bm") 
 const br = document.getElementById("br")
 
+const actPlayer = document.getElementById("actPlayer")
+
 tilesList =[tl, tm, tr, ml, mm, mr, bl, bm, br]
 
 
@@ -97,11 +99,13 @@ function play_move(move)
                 {
                     sign = "O"
                     activePlayer = 2
+                    actPlayer.textContent = "X"
                 }
                 else
                 {
                     sign = "X"
                     activePlayer = 1
+                    actPlayer.textContent = "O"
                 }
 
                 tilesList[move].textContent = sign
@@ -169,6 +173,7 @@ function play_bot()
     movedata = minimax(2, board, difficulty_slider.value)[1]
     tilesList[movedata[0] * 3 + movedata[1]].textContent = "O"
     board[movedata[0]][movedata[1]] = 2
+    actPlayer.textContent = "X"
     
     windata = isWin(board)
     winner = windata[0]
@@ -260,11 +265,32 @@ function minimax(player, state, depth)
     }
 }
 
+function changeBot()
+{
+    reset_board()
+    if (activePlayer == 1)
+    {
+        actPlayer.textContent = "O"
+    }
+    else
+    {
+        actPlayer.textContent = "X"
+    }
+    if (activePlayer == 1)
+    {
+        play_bot()
+    }
+
+}
+
 window.onload = function()
 {  
     
     reset.addEventListener("click", reset_board)
     resetWins.addEventListener("click", resetScores)
+
+    bot.addEventListener('change', () => changeBot())
+
     tl.addEventListener("click", () => play_move(0))
     tm.addEventListener("click", () => play_move(1))
     tr.addEventListener("click", () => play_move(2))
@@ -274,6 +300,12 @@ window.onload = function()
     bl.addEventListener("click", () => play_move(6))
     bm.addEventListener("click", () => play_move(7))
     br.addEventListener("click", () => play_move(8))
+
+
+    if (bot.checked)
+    {
+        play_bot()
+    }
 
 }
 
